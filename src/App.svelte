@@ -21,44 +21,84 @@
         princesa,
     ];
 
-    const giftMap: Map<number, string> = new Map();
+    const giftPathMap: Map<number, string> = new Map();
     for (let i = 0; i < allGifts.length; i++) {
-        giftMap.set(i, allGifts[i]);
+        giftPathMap.set(i, allGifts[i]);
     }
 
-    export let revealedGifts: Map<number, string> = new Map();
+    export let revealedGifts: Map<
+        number,
+        { path: string; left: number; y?: number }
+    > = new Map();
 
     const revealRandomGift = () => {
-        const randomKey = [...giftMap.keys()][Math.floor(Math.random() * giftMap.size)];
+        if (giftPathMap.size == 0) return;
 
-        const gift = giftMap.get(randomKey);
-        giftMap.delete(randomKey);
+        const randomKey = [...giftPathMap.keys()][
+            Math.floor(Math.random() * giftPathMap.size)
+        ];
 
-        revealedGifts.set(randomKey, gift);
+        const path = giftPathMap.get(randomKey);
+        giftPathMap.delete(randomKey);
+
+        // Get random position
+        const left = Math.floor(Math.random() * (48 + 30));
+
+        revealedGifts.set(randomKey, { path, left });
         revealedGifts = revealedGifts;
-
-        console.log(giftMap);
-        console.log(revealedGifts);
     };
 </script>
 
 <main>
-    <h1>navitas</h1>
+    <!-- Positions should be from left: [48%, 70%], and top: [] -->
+    <div id="gift-box">
+        {#each [...revealedGifts.entries()] as [id, { path, left }] (id)}
+            <img
+                class="gift"
+                style="left: {left}%"
+                src={path}
+                alt="sorpresa!"
+                width="200px"
+            />
+        {/each}
+    </div>
 
-    <button on:click={revealRandomGift}>Sorpresa :0</button>
+    <div id="front">
+        <h1>navitas</h1>
 
-    {#each [...revealedGifts.entries()] as [id, path] (id)}
-      <img src={path} alt="sorpresa!" width="200px" />
-    {/each}
+        <button on:click={revealRandomGift}>Sorpresa :0</button>
+    </div>
 </main>
 
 <style>
     :global(body) {
         height: 100vh;
         background-color: #f3f4f6;
+        overflow: hidden;
     }
 
     h1 {
         color: #cb0b0a;
+    }
+
+    #front {
+        position: absolute;
+
+        left: 50%;
+        bottom: 50%;
+        transform: translateX(-50%) translateY(50%);;
+
+        text-align: center;
+    }
+
+    #gift-box {
+        height: 100vh;
+        width: 100vw;
+
+        position: absolute;
+    }
+
+    .gift {
+        position: absolute;
     }
 </style>
