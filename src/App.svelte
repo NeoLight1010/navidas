@@ -57,7 +57,6 @@
 </svelte:head>
 
 <main>
-    <!-- Positions should be from left: [48%, 70%], and top: [0%, 25%] -->
     <div id="gift-box">
         {#each [...revealedGifts.entries()] as [id, { path, left, top }] (id)}
             <img
