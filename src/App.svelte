@@ -44,13 +44,17 @@
 
         // Get random position
         const left = Math.floor(Math.random() * 100);
-        const top = Math.floor(Math.random() * (25));
+        const top = Math.floor(Math.random() * 25);
 
         revealedGifts.set(randomKey, { path, left, top });
         revealedGifts = revealedGifts;
-
     };
 </script>
+
+<svelte:head>
+    <title>navidas c:</title>
+    <html lang="es" />
+</svelte:head>
 
 <main>
     <!-- Positions should be from left: [48%, 70%], and top: [0%, 25%] -->
@@ -80,7 +84,7 @@
 </main>
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
     :global(body) {
         height: 100vh;
@@ -89,11 +93,11 @@
     }
 
     :global(body *) {
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
     }
 
     h1 {
-        color: #f3f4f6
+        color: #f3f4f6;
     }
 
     #front {
@@ -101,7 +105,7 @@
 
         left: 50%;
         bottom: 50%;
-        transform: translateX(-50%) translateY(50%);;
+        transform: translateX(-50%) translateY(50%);
 
         text-align: center;
 
@@ -125,7 +129,7 @@
 
     .gift {
         position: absolute;
-        transform: translateX(-50%) translateY(50%);;
+        transform: translateX(-50%) translateY(50%);
 
         border: dashed;
         border-color: #cb0b0a;
