@@ -80,10 +80,16 @@
 </main>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
     :global(body) {
         height: 100vh;
         background-color: #f3f4f6;
         overflow: hidden;
+    }
+
+    :global(body *) {
+        font-family: 'Poppins', sans-serif;
     }
 
     h1 {
