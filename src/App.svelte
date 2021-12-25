@@ -28,7 +28,7 @@
 
     export let revealedGifts: Map<
         number,
-        { path: string; left: number; y?: number }
+        { path: string; left: number; top: number }
     > = new Map();
 
     const revealRandomGift = () => {
@@ -42,20 +42,21 @@
         giftPathMap.delete(randomKey);
 
         // Get random position
-        const left = Math.floor(Math.random() * (48 + 30));
+        const left = Math.floor(Math.random() * 100);
+        const top = Math.floor(Math.random() * (25));
 
-        revealedGifts.set(randomKey, { path, left });
+        revealedGifts.set(randomKey, { path, left, top });
         revealedGifts = revealedGifts;
     };
 </script>
 
 <main>
-    <!-- Positions should be from left: [48%, 70%], and top: [] -->
+    <!-- Positions should be from left: [48%, 70%], and top: [0%, 25%] -->
     <div id="gift-box">
-        {#each [...revealedGifts.entries()] as [id, { path, left }] (id)}
+        {#each [...revealedGifts.entries()] as [id, { path, left, top }] (id)}
             <img
                 class="gift"
-                style="left: {left}%"
+                style="left: {left}%; top: {top}%"
                 src={path}
                 alt="sorpresa!"
                 width="200px"
@@ -89,6 +90,16 @@
         transform: translateX(-50%) translateY(50%);;
 
         text-align: center;
+
+        background-color: #004733;
+
+        width: 10em;
+        padding: 10px;
+
+        border: solid;
+        border-radius: 10%;
+        border-color: #a5c1ae;
+        border-width: thick;
     }
 
     #gift-box {
@@ -100,5 +111,6 @@
 
     .gift {
         position: absolute;
+        transform: translateX(-50%) translateY(50%);;
     }
 </style>
