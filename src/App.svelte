@@ -47,6 +47,8 @@
 
         revealedGifts.set(randomKey, { path, left, top });
         revealedGifts = revealedGifts;
+
+        giftPathMap = giftPathMap;
     };
 </script>
 
@@ -67,7 +69,13 @@
     <div id="front">
         <h1>navitas</h1>
 
-        <button on:click={revealRandomGift}>Sorpresa :0</button>
+        <button on:click={revealRandomGift}>
+            {#if giftPathMap.size > 0}
+                Clic para una sorpresa :0 🎁
+            {:else}
+                No hay más regalos :c
+            {/if}
+        </button>
     </div>
 </main>
 
@@ -112,5 +120,10 @@
     .gift {
         position: absolute;
         transform: translateX(-50%) translateY(50%);;
+
+        border: dashed;
+        border-color: #cb0b0a;
+        border-radius: 5%;
+        border-width: 7px;
     }
 </style>
