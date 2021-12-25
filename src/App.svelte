@@ -21,9 +21,9 @@
         princesa,
     ];
 
-    const giftPathMap: Map<number, string> = new Map();
+    let remainingGifts: Map<number, string> = new Map();
     for (let i = 0; i < allGifts.length; i++) {
-        giftPathMap.set(i, allGifts[i]);
+        remainingGifts.set(i, allGifts[i]);
     }
 
     export let revealedGifts: Map<
@@ -32,14 +32,15 @@
     > = new Map();
 
     const revealRandomGift = () => {
-        if (giftPathMap.size == 0) return;
+        if (remainingGifts.size == 0) return;
 
-        const randomKey = [...giftPathMap.keys()][
-            Math.floor(Math.random() * giftPathMap.size)
+        const randomKey = [...remainingGifts.keys()][
+            Math.floor(Math.random() * remainingGifts.size)
         ];
 
-        const path = giftPathMap.get(randomKey);
-        giftPathMap.delete(randomKey);
+        const path = remainingGifts.get(randomKey);
+        remainingGifts.delete(randomKey);
+        remainingGifts = remainingGifts;
 
         // Get random position
         const left = Math.floor(Math.random() * 100);
@@ -48,7 +49,6 @@
         revealedGifts.set(randomKey, { path, left, top });
         revealedGifts = revealedGifts;
 
-        giftPathMap = giftPathMap;
     };
 </script>
 
@@ -70,7 +70,7 @@
         <h1>navitas</h1>
 
         <button on:click={revealRandomGift}>
-            {#if giftPathMap.size > 0}
+            {#if remainingGifts.size > 0}
                 Clic para una sorpresa :0 🎁
             {:else}
                 No hay más regalos :c
