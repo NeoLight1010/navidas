@@ -93,7 +93,7 @@
     }
 
     h1 {
-        color: #cb0b0a;
+        color: #f3f4f6
     }
 
     #front {
@@ -112,7 +112,7 @@
 
         border: solid;
         border-radius: 10%;
-        border-color: #a5c1ae;
+        border-color: #cb0b0a;
         border-width: thick;
     }
 
